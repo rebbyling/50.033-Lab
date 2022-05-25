@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D marioBody;
     private SpriteRenderer marioSprite;
     private int score = 0;
+    private  Animator marioAnimator;
     
     private bool onGroundState = true;
     private bool faceRightState = true;
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
         //instantiate mario sprite
         marioSprite = GetComponent<SpriteRenderer>();
+        marioAnimator  =  GetComponent<Animator>();
+
     }   
 
     // called when the cube hits the floor
@@ -60,11 +63,15 @@ public class PlayerController : MonoBehaviour
       if (Input.GetKeyDown("a") && faceRightState){
           faceRightState = false;
           marioSprite.flipX = true;
+          if (Mathf.Abs(marioBody.velocity.x) >  1.0) 
+	        marioAnimator.SetTrigger("onSkid");
       }
 
       if (Input.GetKeyDown("d") && !faceRightState){
           faceRightState = true;
           marioSprite.flipX = false;
+          if (Mathf.Abs(marioBody.velocity.x) >  1.0) 
+	        marioAnimator.SetTrigger("onSkid");
       }
 
       // when jumping, and Gomba is near Mario and we haven't registered our score
@@ -78,6 +85,10 @@ public class PlayerController : MonoBehaviour
           }
       }
 
+      marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.velocity.x));
+      marioAnimator.SetBool("onGround", onGroundState);
+
+    
     }
 
     void FixedUpdate()
