@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground")) {
             onGroundState = true; //on ground
+            marioAnimator.SetBool("onGround", onGroundState);
             countScoreState = false;
             scoreText.text = "Score: " + score.ToString();
         };
@@ -90,14 +91,15 @@ public class PlayerController : MonoBehaviour
           }
       }
 
-      marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.velocity.x));
-      marioAnimator.SetBool("onGround", onGroundState);
+      
 
     
     }
 
     void FixedUpdate()
     {
+        marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.velocity.x));
+        marioAnimator.SetBool("onGround", onGroundState);
         // dynamic rigidbody
       float moveHorizontal = Input.GetAxis("Horizontal");
       if (Mathf.Abs(moveHorizontal) > 0){
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
           marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
           onGroundState = false;
           countScoreState = true;
+          PlayJumpSound();
       }
     }
 

@@ -7,6 +7,8 @@ TagManager:
   - Ground
   - Enemy
   - Brick
+  - Pipe
+  - Ground-Obstacles
   layers:
   - Default
   - TransparentFX

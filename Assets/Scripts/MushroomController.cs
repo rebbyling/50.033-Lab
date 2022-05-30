@@ -4,27 +4,50 @@ using UnityEngine;
 
 public class MushroomController : MonoBehaviour
 {
-    private float speed = 3;
-    private Vector2 currentPosition;
-    private Vector2 currentDirection;
-
-    private Rigidbody2D rigidBody;
+    private Vector2 velocityVector;
+    private float velocity = 4.0f;
+    private bool isMoving = true;
+    private int xDirection = 1;
+    private Rigidbody2D mushroomBody;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
-        rigidBody.AddForce(Vector2.up  *  20, ForceMode2D.Impulse);
+        mushroomBody = GetComponent<Rigidbody2D>();
+        mushroomBody.AddForce(Vector2.up * 15, ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 nextPosition = currentPosition + speed * currentDirection.normalized * Time.fixedDeltaTime;
-        rigidBody.MovePosition(nextPosition);
+        
     }
 
-    void FixedUpdate() 
-    {
-    
+    void FixedUpdate() {
+        if (isMoving) {
+            MoveMushroom();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col) {
+        if (col.gameObject.CompareTag("Pipe")) {
+            xDirection *= -1;
+            Debug.Log("hit pillar");
+        }
+
+        if (col.gameObject.CompareTag("Player")) {
+            isMoving = false;
+        }
+    }
+
+    void OnBecameInvisible(){
+        Debug.Log("mushroom hit");
+        Destroy(gameObject);	
+    }
+
+    void MoveMushroom() {
+        velocityVector = new Vector2(velocity * xDirection, mushroomBody.velocity.y);
+        mushroomBody.velocity = velocityVector;
     }
 }
