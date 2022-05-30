@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D marioBody;
     private SpriteRenderer marioSprite;
     private int score = 0;
-    private  Animator marioAnimator;
+    private Animator marioAnimator;
+    private AudioSource marioAudio;
     
     private bool onGroundState = true;
     private bool faceRightState = true;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
         //instantiate mario sprite
         marioSprite = GetComponent<SpriteRenderer>();
         marioAnimator  =  GetComponent<Animator>();
-
+        marioAudio = GetComponent<AudioSource>();
     }   
 
     // called when the cube hits the floor
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour
             countScoreState = false;
             scoreText.text = "Score: " + score.ToString();
         };
+
+        if (col.gameObject.CompareTag("Brick")) {
+            onGroundState = true;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -109,5 +114,9 @@ public class PlayerController : MonoBehaviour
           onGroundState = false;
           countScoreState = true;
       }
+    }
+
+    void PlayJumpSound(){
+	    marioAudio.PlayOneShot(marioAudio.clip);
     }
 }
