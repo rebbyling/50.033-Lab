@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class MushroomController : MonoBehaviour
 {
-    public float speed;
-    public Vector2 currentPosition;
-    public Vector2 currentDirection;
+    private float speed = 3;
+    private Vector2 currentPosition;
+    private Vector2 currentDirection = new Vector2(1,0);
 
     private Rigidbody2D rigidBody;
     // Start is called before the first frame update
     void Start()
     {
-        currentDirection = new Vector2(1,0);
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.AddForce(Vector2.up  *  20, ForceMode2D.Impulse);
     }
@@ -21,11 +20,11 @@ public class MushroomController : MonoBehaviour
     void Update()
     {
         Vector2 nextPosition = currentPosition + speed * currentDirection.normalized * Time.fixedDeltaTime;
+        rigidBody.MovePosition(nextPosition);
     }
 
     void FixedUpdate() 
     {
-        Vector2 nextPosition = currentPosition + speed * currentDirection.normalized * Time.fixedDeltaTime;
-        rigidBody.MovePosition(nextPosition);
+    
     }
 }
