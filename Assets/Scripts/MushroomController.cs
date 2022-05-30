@@ -6,7 +6,7 @@ public class MushroomController : MonoBehaviour
 {
     private float speed = 3;
     private Vector2 currentPosition;
-    private Vector2 currentDirection = new Vector2(1,0);
+    private Vector2 currentDirection;
 
     private Rigidbody2D rigidBody;
     // Start is called before the first frame update
