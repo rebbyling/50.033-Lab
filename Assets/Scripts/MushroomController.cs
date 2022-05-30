@@ -43,7 +43,7 @@ public class MushroomController : MonoBehaviour
 
     void OnBecameInvisible(){
         Debug.Log("mushroom hit");
-        Destroy(gameObject);	
+        Object.Destroy(gameObject);	
     }
 
     void MoveMushroom() {
