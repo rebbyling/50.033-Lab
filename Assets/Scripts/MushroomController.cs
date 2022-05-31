@@ -38,6 +38,8 @@ public class MushroomController : MonoBehaviour
 
         if (col.gameObject.CompareTag("Player")) {
             isMoving = false;
+            //set the mushroom to be invisible then can trigger onBecameInvisible
+            gameObject.SetActive(false);
         }
     }
 

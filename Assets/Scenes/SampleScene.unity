@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 81348816}
   - component: {fileID: 81348815}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Score
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1130,7 +1130,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375146314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.95, y: -2.8, z: 0}
+  m_LocalPosition: {x: -1.95, y: -2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
